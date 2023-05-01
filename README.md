@@ -15,21 +15,22 @@
     
   default user list 
   --------------------------------------
-Amazon Linux 2023: ec2-user
-Amazon Linux 2: ec2-user
-Amazon Linux: ec2-user
-CentOS:	centos or ec2-user
-Debian:	admin
-Fedora:	fedora or ec2-user
-RHEL:	ec2-user or root
-SUSE:	ec2-user or root
-Ubuntu:	ubuntu
-Oracle:	ec2-user
-Bitnami:	bitnami
-Other:	Check with the AMI provider
+        
+        Amazon Linux 2023: ec2-user
+        Amazon Linux 2: ec2-user
+        Amazon Linux: ec2-user
+        CentOS:	centos or ec2-user
+        Debian:	admin
+        Fedora:	fedora or ec2-user
+        RHEL:	ec2-user or root
+        SUSE:	ec2-user or root
+        Ubuntu:	ubuntu
+        Oracle:	ec2-user
+        Bitnami:	bitnami
+        Other:	Check with the AMI provider
 
-reference:
-https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html
-    
+        reference:
+        https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html
+
 
 
