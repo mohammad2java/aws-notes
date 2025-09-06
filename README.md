@@ -174,8 +174,31 @@ Below is a list of VPC features, why they are useful, and examples of how they a
 
 
 
+# 🔐 AWS IAM (Identity and Access Management) Features
 
+AWS IAM helps you securely control access to AWS services and resources.  
+You can manage **who** is authenticated (identity) and **what** they are authorized to do (permissions).
 
+---
+
+## 🔑 Core IAM Features
+
+| Feature | Why Use It | Example |
+|---------|------------|---------|
+| **IAM Users** | Represents individual people or applications needing access to AWS resources. Each user has credentials. | Create a user **developer1** with programmatic access keys for CLI use. |
+| **IAM Groups** | Organize multiple users and attach permissions collectively instead of managing them individually. | Add all developers to a **Developers Group** that has EC2 read-only permissions. |
+| **IAM Roles** | Provide temporary permissions to AWS resources without long-term credentials. | An **EC2 instance role** lets an app access S3 buckets without storing keys. |
+| **Policies** | JSON documents that define permissions (allow/deny actions on resources). | Attach an **S3FullAccess policy** to a role so an app can manage S3 objects. |
+| **Temporary Security Credentials (STS)** | Provide time-limited credentials for secure access. | A contractor gets **12-hour temporary credentials** to access a DynamoDB table. |
+| **IAM Federation (SSO)** | Allow users to log in with corporate credentials or third-party identity providers (Google, AD, Okta). | Employees use their **company Active Directory** login to access AWS Console. |
+| **Access Keys** | Programmatic credentials (ID + secret) for CLI/SDK/API access. | An automation script uses **access keys** to call AWS APIs. |
+| **Multi-Factor Authentication (MFA)** | Adds an extra layer of security beyond username/password. | Require admins to use **MFA tokens** when accessing the AWS Console. |
+| **Service-Linked Roles** | Roles created automatically by AWS services to perform tasks on your behalf. | **CloudWatch** creates a service-linked role to push logs securely. |
+| **Permissions Boundaries** | Limit the maximum permissions an IAM entity (user/role) can have. | A developer role has permissions, but the boundary prevents creating IAM users. |
+| **Resource-Based Policies** | Policies attached directly to resources (like S3, SNS, SQS) for fine-grained control. | An **S3 bucket policy** allows access only from a specific VPC. |
+| **Access Analyzer** | Helps identify resources shared publicly or with external accounts. | Detects that an **S3 bucket is accidentally public** and alerts admins. |
+| **Credential Report & Access Advisor** | Provide visibility into user activity and unused permissions. | Identify IAM users with **unused keys** or roles that haven’t been used in 90 days. |
+| **Identity Center (AWS SSO)** | Centralized single sign-on for multiple AWS accounts and applications. | A user logs in once and gets access to **multiple AWS accounts** via Identity Center. |
 
 
 
