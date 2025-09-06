@@ -227,43 +227,63 @@ You can manage **who** is authenticated (identity) and **what** they are authori
 | **Launch Templates & Configurations** | Define standard instance settings for consistency. | Use a **launch template** for auto-scaling a fleet of identical servers. |
 
 
-
-# 🌐 Amazon API Gateway Features
+# 🌐 Amazon API Gateway Features with Costing & Free Tier
 
 Amazon API Gateway is a fully managed service to create, publish, maintain, monitor, and secure APIs at any scale.  
 It acts as the **front door** for applications to access data, business logic, or functionality from your backend services.
 
 ---
 
-## 🔑 Core API Gateway Features
+## 🎁 Free Tier (12 Months)
 
-| Feature | Why Use It | Example |
-|---------|------------|---------|
-| **API Types (REST, HTTP, WebSocket)** | Choose the right type of API depending on your needs (simple, complex, or real-time). | Use a **WebSocket API** for a chat app, an **HTTP API** for microservices, or a **REST API** for enterprise APIs. |
-| **Custom Domain Names** | Use your own branded domain for APIs instead of AWS-generated URLs. | Expose API as `https://api.mycompany.com` instead of `https://abcd123.execute-api.us-east-1.amazonaws.com`. |
-| **Stages & Stage Variables** | Deploy multiple versions of APIs (dev, test, prod) with environment-specific variables. | `https://api.mycompany.com/dev` vs `https://api.mycompany.com/prod`. |
-| **Request & Response Transformation** | Modify requests before reaching the backend or responses before sending to the client. | Transform XML request into JSON before sending to a Lambda. |
-| **Authorization & Authentication** | Control who can call your API (IAM, Cognito, Lambda authorizers, JWT). | Only logged-in **Cognito users** can access `/orders` endpoint. |
-| **Rate Limiting & Throttling** | Prevent API misuse and protect backends from overload. | Limit clients to **100 requests per second** per API key. |
-| **API Keys & Usage Plans** | Provide controlled access to APIs and track usage. | Issue an API key to a **partner company** with a quota of 1M requests/month. |
-| **Caching (REST APIs only)** | Reduce backend load and improve performance by caching API responses. | Cache product catalog responses for **60 seconds** to reduce DB calls. |
-| **Integration with AWS Services** | Connect APIs directly to Lambda, DynamoDB, S3, Kinesis, or any HTTP endpoint. | API Gateway → Lambda → DynamoDB for a **serverless order system**. |
-| **Monitoring & Logging (CloudWatch, X-Ray)** | Monitor API traffic, latency, and errors with logs and traces. | Track that **90% of requests** complete in <100 ms. |
-| **SDK Generation** | Auto-generate client SDKs for multiple platforms (iOS, Android, JavaScript). | Generate an **iOS SDK** for mobile developers to call APIs easily. |
-| **VPC Links / Private Integrations** | Access internal services running inside VPC securely. | API Gateway connects to an **internal microservice** hosted on EC2. |
-| **Cross-Origin Resource Sharing (CORS)** | Allow secure API calls from browsers hosted on different domains. | A React app on `myapp.com` calls an API hosted on `api.mycompany.com`. |
-| **WebSocket APIs** | Enable real-time, bidirectional communication. | Build a **live sports score app** using WebSocket API. |
-| **Deployment & Versioning** | Roll out new API versions without affecting existing clients. | `/v1/orders` vs `/v2/orders` with new schema. |
-| **Request Validation** | Validate incoming request payloads before sending to backend. | Ensure client sends a **valid JSON schema** before Lambda is triggered. |
-| **Access Control with Resource Policies** | Restrict access at the resource level (IP ranges, VPCs, accounts). | Allow only **corporate IP ranges** to access a private API. |
+- **HTTP APIs** → 1 million requests per month  
+- **REST APIs** → 1 million requests per month  
+- **WebSocket APIs** → 1 million messages + 750,000 connection minutes per month  
+- **Data Transfer** → Counts separately under AWS free tier (1 GB outbound free per month)  
+- **Other Features** (like Custom Domain, Caching, VPC Links, CloudWatch logs) → **not included** in free tier (billed separately)
+
+---
+
+## 🔑 Core API Gateway Features with Costing
+
+| Feature | Why Use It | Example | Costing |
+|---------|------------|---------|---------|
+| **API Types (REST, HTTP, WebSocket)** | Choose the right API type depending on workload. | Use **HTTP API** for microservices, **REST API** for enterprise, **WebSocket API** for chat apps. | **HTTP API**: $1 per million requests (first 300M). <br> **REST API**: $3.50 per million (first 333M). <br> **WebSocket API**: $1 per million messages + $0.25 per million connection minutes. |
+| **Custom Domain Names** | Branded domains instead of AWS URLs. | `https://api.mycompany.com`. | $0.40 per custom domain/month + ACM cert (free). |
+| **Stages & Stage Variables** | Maintain environments (dev, test, prod). | `/dev` vs `/prod`. | No extra cost. |
+| **Request & Response Transformation** | Modify request/response payloads. | Convert XML → JSON before sending to Lambda. | Included in request cost. |
+| **Authorization & Authentication** | Secure access via IAM, Cognito, JWT, Lambda authorizers. | Only logged-in **Cognito users** access `/orders`. | Lambda authorizer adds **extra Lambda cost** per execution. |
+| **Rate Limiting & Throttling** | Prevent abuse and protect backend. | Limit partner API calls to 100 RPS. | Included in request cost. |
+| **API Keys & Usage Plans** | Manage partner/customer access with quotas. | Issue key with 1M requests/month. | No extra cost (requests billed normally). |
+| **Caching (REST APIs only)** | Reduce backend calls, improve latency. | Cache product catalog for 60s. | 0.5 GB = $0.02/hour, 1.6 GB = $0.038/hour, up to 237 GB = $3.80/hour. |
+| **Integration with AWS Services** | Call Lambda, DynamoDB, S3, etc. | API → Lambda → DynamoDB. | Normal API Gateway request + backend service cost. |
+| **Monitoring & Logging (CloudWatch, X-Ray)** | Track performance, errors, and latency. | Monitor **90% requests <100ms**. | CloudWatch Logs: $0.50/GB ingested. <br> X-Ray: $5 per 1M traces + $0.50/GB. |
+| **SDK Generation** | Auto-generate SDKs for iOS/Android/JS. | Generate iOS SDK for mobile developers. | Free. |
+| **VPC Links / Private Integrations** | Securely connect internal services. | API → Private EC2 in VPC. | $0.022/hour per VPC Link + data processed cost. |
+| **Cross-Origin Resource Sharing (CORS)** | Allow cross-domain browser calls. | React app (`myapp.com`) → API (`api.mycompany.com`). | Included in request cost. |
+| **WebSocket APIs** | Real-time, two-way communication. | Live sports score API. | $1 per million messages + $0.25 per million connection minutes. |
+| **Deployment & Versioning** | Support multiple API versions. | `/v1/orders` vs `/v2/orders`. | No extra cost. |
+| **Request Validation** | Validate schema before backend call. | Ensure valid JSON payload. | Included in request cost. |
+| **Access Control with Resource Policies** | Restrict by IP, VPC, or account. | Allow only **corporate IPs**. | Included in request cost. |
+
+---
+
+## 💰 Cost Example Comparison
+
+- **Scenario**: 10 million requests/month, 1 KB each  
+  - **HTTP API**: 10M × $1 = **$10**  
+  - **REST API**: 10M × $3.50 = **$35**  
+  - **WebSocket API**: 10M messages + 1M connection minutes → **$12.50**  
 
 ---
 
 ## ✅ Summary
 
-- **HTTP APIs** → Low-cost, fast, best for simple services.  
-- **REST APIs** → Full feature set, enterprise-grade, supports caching & transformations.  
-- **WebSocket APIs** → Real-time communication.  
+- **Free Tier** gives **1M requests/messages/month** (good for dev/testing).  
+- **HTTP APIs** → Best for cost-sensitive, lightweight services.  
+- **REST APIs** → Full-featured, enterprise-grade APIs (request validation, caching, usage plans).  
+- **WebSocket APIs** → Real-time apps like chat, gaming, notifications, IoT.  
+
 
 
 
