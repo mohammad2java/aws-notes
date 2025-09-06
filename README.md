@@ -141,12 +141,37 @@ This document provides a categorized list of **AWS services** with short descrip
 | **Migration Hub** | Track and manage migrations across AWS services. |
 | **DataSync** | Automate large data transfers between on-prem and AWS. |
 
+
+# 🌐 Amazon VPC Features
+
+Amazon Virtual Private Cloud (VPC) lets you launch AWS resources in a logically isolated network that you define.  
+Below is a list of VPC features, why they are useful, and examples of how they are applied.
+
 ---
 
-✅ This list covers the **core AWS services** grouped by category for quick reference.
-```
+## 🔑 Core Features of VPC
 
----
+| Feature | Why Use It | Example |
+|---------|------------|---------|
+| **Subnets** | Separate resources into **public** (internet-facing) and **private** (internal only) networks for security and better architecture design. | Web servers run in a **public subnet** while databases stay in a **private subnet** for isolation. |
+| **Route Tables** | Control how traffic flows within the VPC, to the internet, or to other networks. | A route table sends all `0.0.0.0/0` traffic to the **Internet Gateway** for public internet access. |
+| **Internet Gateway (IGW)** | Enables internet connectivity for resources in public subnets. | A web server in a public subnet uses IGW to serve content to global users. |
+| **NAT Gateway / NAT Instance** | Lets private subnet resources access the internet **outbound** without exposing them to inbound internet traffic. | A database downloads OS patches via **NAT Gateway** without being exposed to the internet. |
+| **Elastic IPs** | Provides a **static public IP** for resources, useful for whitelisting or external access. | Assign a fixed IP to a **bastion host** so administrators can always connect securely. |
+| **VPC Peering** | Connects two VPCs privately over AWS’s backbone network. | A **Dev VPC** securely communicates with a **Prod VPC** without internet exposure. |
+| **Transit Gateway** | Acts as a central hub to connect multiple VPCs and on-premises networks, simplifying complex topologies. | An enterprise with **10 VPCs** and **2 data centers** uses Transit Gateway for hub-and-spoke networking. |
+| **VPC Endpoints (Interface/Gateway)** | Securely connect to AWS services (e.g., S3, DynamoDB) without using public internet. | An app in a private subnet retrieves images from **S3** via a VPC Gateway Endpoint. |
+| **Security Groups (SGs)** | Instance-level firewalls that allow only required inbound/outbound traffic. | A DB SG allows connections **only from the App Server SG**, blocking everything else. |
+| **Network ACLs (NACLs)** | Subnet-level firewalls that control inbound and outbound traffic (stateless). | Block a known malicious IP range at the **subnet level** for added security. |
+| **Flow Logs** | Capture IP traffic logs for troubleshooting, monitoring, and compliance. | Detect suspicious spikes in traffic by analyzing **VPC Flow Logs** in CloudWatch. |
+| **Elastic Network Interfaces (ENIs)** | Attach multiple NICs to an EC2 instance for failover or network segregation. | A server has one ENI for **public traffic** and another for **internal-only communication**. |
+| **DHCP Options Sets** | Customize DNS and DHCP settings for resources in the VPC. | Point instances to use **corporate DNS servers** instead of AWS defaults. |
+| **VPN Connections** | Connect on-premises networks securely to AWS via encrypted IPsec tunnels. | A corporate office establishes a **VPN tunnel** to access workloads in AWS. |
+| **AWS Direct Connect** | Provides private, low-latency, high-bandwidth dedicated links from data centers to AWS. | A **bank** uses Direct Connect for fast, secure connections to its AWS workloads. |
+| **PrivateLink** | Access services in another VPC privately without internet or VPC peering. | A SaaS vendor exposes its service using **PrivateLink**, and customers consume it securely. |
+| **IPv6 Support** | Provides scalable addressing for global applications and IoT. | A global e-commerce app uses **IPv6** to handle millions of devices worldwide. |
+| **Carrier Gateway (CGW)** | Connect mobile networks (4G/5G) with AWS for telecom workloads. | A **5G IoT platform** connects mobile devices directly to AWS workloads via Carrier Gateway. |
+
 
 
 
