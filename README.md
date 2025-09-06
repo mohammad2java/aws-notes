@@ -202,6 +202,32 @@ You can manage **who** is authenticated (identity) and **what** they are authori
 
 
 
+## 🔑 Core EC2 Features
+
+| Feature | Why Use It | Example |
+|---------|------------|---------|
+| **Instance Types** | Choose from a wide variety of instance types optimized for compute, memory, storage, or GPU. | Use **C7g instances** for high-performance compute workloads, or **R6g** for memory-heavy databases. |
+| **Amazon Machine Images (AMIs)** | Launch preconfigured instances with OS, apps, and software. | Start a server with a **Linux + Apache pre-built AMI**. |
+| **Elastic Block Store (EBS)** | Persistent block storage volumes that survive instance stop/start. | Attach a 100 GB EBS volume to an EC2 running MySQL for database storage. |
+| **Instance Store** | Temporary block storage physically attached to the host (fast but non-persistent). | Use for **cache** or temporary logs that don’t need to persist. |
+| **Elastic IPs** | Assign a static public IP address to an instance. | A **bastion host** keeps the same IP address even if restarted. |
+| **Security Groups** | Virtual firewalls at the instance level. | Allow only **port 22 (SSH)** for admins and **port 443 (HTTPS)** for users. |
+| **Key Pairs (SSH/RDP)** | Secure login to instances without passwords. | Use an SSH key to log into a Linux EC2 server. |
+| **Elastic Load Balancer (ELB)** | Distribute incoming traffic across multiple EC2 instances. | A web app uses an **ALB** to balance traffic between 3 EC2 servers. |
+| **Auto Scaling** | Automatically increase or decrease EC2 capacity based on demand. | Scale from **2 to 10 EC2 instances** during traffic spikes, then scale back down. |
+| **Placement Groups** | Control how instances are placed across hardware (cluster, spread, partition). | Run **HPC workloads** with low-latency networking in a cluster placement group. |
+| **EC2 Spot Instances** | Use spare AWS capacity at up to 90% lower cost. | Run **big data batch jobs** cost-effectively on Spot instances. |
+| **EC2 Reserved Instances / Savings Plans** | Save money with 1–3 year commitments. | A production web app runs on **Reserved Instances** for predictable workloads. |
+| **Dedicated Hosts / Instances** | Run EC2 on dedicated physical servers for compliance or licensing. | A financial company needs **dedicated servers** for regulatory compliance. |
+| **Elastic Network Interfaces (ENIs)** | Attach multiple NICs to an instance for failover or network segregation. | Use one ENI for **public internet traffic** and another for **internal-only communication**. |
+| **User Data & Metadata** | Pass startup scripts or retrieve instance information programmatically. | Use **User Data** to auto-install Nginx on boot. |
+| **Monitoring (CloudWatch)** | Track performance metrics like CPU, memory, and network. | Set a **CloudWatch alarm** to restart an instance if CPU usage stays at 0%. |
+| **EC2 Hibernate** | Pause an instance and resume later with the same memory and state. | A developer pauses a test server at night and resumes it in the morning. |
+| **Elastic Fabric Adapter (EFA)** | Provides high-performance networking for HPC and ML workloads. | Train ML models on **GPU clusters** with low-latency communication. |
+| **Launch Templates & Configurations** | Define standard instance settings for consistency. | Use a **launch template** for auto-scaling a fleet of identical servers. |
+
+
+
 
 
 
