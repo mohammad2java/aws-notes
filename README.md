@@ -228,6 +228,44 @@ You can manage **who** is authenticated (identity) and **what** they are authori
 
 
 
+# 🌐 Amazon API Gateway Features
+
+Amazon API Gateway is a fully managed service to create, publish, maintain, monitor, and secure APIs at any scale.  
+It acts as the **front door** for applications to access data, business logic, or functionality from your backend services.
+
+---
+
+## 🔑 Core API Gateway Features
+
+| Feature | Why Use It | Example |
+|---------|------------|---------|
+| **API Types (REST, HTTP, WebSocket)** | Choose the right type of API depending on your needs (simple, complex, or real-time). | Use a **WebSocket API** for a chat app, an **HTTP API** for microservices, or a **REST API** for enterprise APIs. |
+| **Custom Domain Names** | Use your own branded domain for APIs instead of AWS-generated URLs. | Expose API as `https://api.mycompany.com` instead of `https://abcd123.execute-api.us-east-1.amazonaws.com`. |
+| **Stages & Stage Variables** | Deploy multiple versions of APIs (dev, test, prod) with environment-specific variables. | `https://api.mycompany.com/dev` vs `https://api.mycompany.com/prod`. |
+| **Request & Response Transformation** | Modify requests before reaching the backend or responses before sending to the client. | Transform XML request into JSON before sending to a Lambda. |
+| **Authorization & Authentication** | Control who can call your API (IAM, Cognito, Lambda authorizers, JWT). | Only logged-in **Cognito users** can access `/orders` endpoint. |
+| **Rate Limiting & Throttling** | Prevent API misuse and protect backends from overload. | Limit clients to **100 requests per second** per API key. |
+| **API Keys & Usage Plans** | Provide controlled access to APIs and track usage. | Issue an API key to a **partner company** with a quota of 1M requests/month. |
+| **Caching (REST APIs only)** | Reduce backend load and improve performance by caching API responses. | Cache product catalog responses for **60 seconds** to reduce DB calls. |
+| **Integration with AWS Services** | Connect APIs directly to Lambda, DynamoDB, S3, Kinesis, or any HTTP endpoint. | API Gateway → Lambda → DynamoDB for a **serverless order system**. |
+| **Monitoring & Logging (CloudWatch, X-Ray)** | Monitor API traffic, latency, and errors with logs and traces. | Track that **90% of requests** complete in <100 ms. |
+| **SDK Generation** | Auto-generate client SDKs for multiple platforms (iOS, Android, JavaScript). | Generate an **iOS SDK** for mobile developers to call APIs easily. |
+| **VPC Links / Private Integrations** | Access internal services running inside VPC securely. | API Gateway connects to an **internal microservice** hosted on EC2. |
+| **Cross-Origin Resource Sharing (CORS)** | Allow secure API calls from browsers hosted on different domains. | A React app on `myapp.com` calls an API hosted on `api.mycompany.com`. |
+| **WebSocket APIs** | Enable real-time, bidirectional communication. | Build a **live sports score app** using WebSocket API. |
+| **Deployment & Versioning** | Roll out new API versions without affecting existing clients. | `/v1/orders` vs `/v2/orders` with new schema. |
+| **Request Validation** | Validate incoming request payloads before sending to backend. | Ensure client sends a **valid JSON schema** before Lambda is triggered. |
+| **Access Control with Resource Policies** | Restrict access at the resource level (IP ranges, VPCs, accounts). | Allow only **corporate IP ranges** to access a private API. |
+
+---
+
+## ✅ Summary
+
+- **HTTP APIs** → Low-cost, fast, best for simple services.  
+- **REST APIs** → Full feature set, enterprise-grade, supports caching & transformations.  
+- **WebSocket APIs** → Real-time communication.  
+
+
 
 
 
