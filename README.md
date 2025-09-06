@@ -90,37 +90,37 @@ This document provides a categorized list of **AWS services** with **purpose**, 
 
 
 
+# 🛡️ Amazon VPC Features with Costing & Free Tier
 
-
-# 🌐 Amazon VPC Features
-
-Amazon Virtual Private Cloud (VPC) lets you launch AWS resources in a logically isolated network that you define.  
-Below is a list of VPC features, why they are useful, and examples of how they are applied.
+Amazon Virtual Private Cloud (VPC) lets you launch AWS resources in a logically isolated network that you define.
+Below is a list of VPC features, why they are useful, examples of use, associated **costs**, and **Free Tier eligibility**.
 
 ---
 
 ## 🔑 Core Features of VPC
 
-| Feature | Why Use It | Example |
-|---------|------------|---------|
-| **Subnets** | Separate resources into **public** (internet-facing) and **private** (internal only) networks for security and better architecture design. | Web servers run in a **public subnet** while databases stay in a **private subnet** for isolation. |
-| **Route Tables** | Control how traffic flows within the VPC, to the internet, or to other networks. | A route table sends all `0.0.0.0/0` traffic to the **Internet Gateway** for public internet access. |
-| **Internet Gateway (IGW)** | Enables internet connectivity for resources in public subnets. | A web server in a public subnet uses IGW to serve content to global users. |
-| **NAT Gateway / NAT Instance** | Lets private subnet resources access the internet **outbound** without exposing them to inbound internet traffic. | A database downloads OS patches via **NAT Gateway** without being exposed to the internet. |
-| **Elastic IPs** | Provides a **static public IP** for resources, useful for whitelisting or external access. | Assign a fixed IP to a **bastion host** so administrators can always connect securely. |
-| **VPC Peering** | Connects two VPCs privately over AWS’s backbone network. | A **Dev VPC** securely communicates with a **Prod VPC** without internet exposure. |
-| **Transit Gateway** | Acts as a central hub to connect multiple VPCs and on-premises networks, simplifying complex topologies. | An enterprise with **10 VPCs** and **2 data centers** uses Transit Gateway for hub-and-spoke networking. |
-| **VPC Endpoints (Interface/Gateway)** | Securely connect to AWS services (e.g., S3, DynamoDB) without using public internet. | An app in a private subnet retrieves images from **S3** via a VPC Gateway Endpoint. |
-| **Security Groups (SGs)** | Instance-level firewalls that allow only required inbound/outbound traffic. | A DB SG allows connections **only from the App Server SG**, blocking everything else. |
-| **Network ACLs (NACLs)** | Subnet-level firewalls that control inbound and outbound traffic (stateless). | Block a known malicious IP range at the **subnet level** for added security. |
-| **Flow Logs** | Capture IP traffic logs for troubleshooting, monitoring, and compliance. | Detect suspicious spikes in traffic by analyzing **VPC Flow Logs** in CloudWatch. |
-| **Elastic Network Interfaces (ENIs)** | Attach multiple NICs to an EC2 instance for failover or network segregation. | A server has one ENI for **public traffic** and another for **internal-only communication**. |
-| **DHCP Options Sets** | Customize DNS and DHCP settings for resources in the VPC. | Point instances to use **corporate DNS servers** instead of AWS defaults. |
-| **VPN Connections** | Connect on-premises networks securely to AWS via encrypted IPsec tunnels. | A corporate office establishes a **VPN tunnel** to access workloads in AWS. |
-| **AWS Direct Connect** | Provides private, low-latency, high-bandwidth dedicated links from data centers to AWS. | A **bank** uses Direct Connect for fast, secure connections to its AWS workloads. |
-| **PrivateLink** | Access services in another VPC privately without internet or VPC peering. | A SaaS vendor exposes its service using **PrivateLink**, and customers consume it securely. |
-| **IPv6 Support** | Provides scalable addressing for global applications and IoT. | A global e-commerce app uses **IPv6** to handle millions of devices worldwide. |
-| **Carrier Gateway (CGW)** | Connect mobile networks (4G/5G) with AWS for telecom workloads. | A **5G IoT platform** connects mobile devices directly to AWS workloads via Carrier Gateway. |
+| Feature                               | Why Use It                                                                                        | Example                                              | Costing                                                                                    | Free Tier                                         |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| **Subnets**                           | Separate resources into **public** and **private** networks for security and architecture design. | Web servers in public subnet, DBs in private subnet. | No cost.                                                                                   | Always free.                                      |
+| **Route Tables**                      | Control how traffic flows within the VPC, to the internet, or other networks.                     | Route `0.0.0.0/0` to IGW for internet access.        | No cost.                                                                                   | Always free.                                      |
+| **Internet Gateway (IGW)**            | Enables internet connectivity for public subnet resources.                                        | Web server serves content globally.                  | No cost.                                                                                   | Always free.                                      |
+| **NAT Gateway / NAT Instance**        | Private subnet resources access internet outbound safely.                                         | DB downloads OS patches via NAT Gateway.             | NAT Gateway: \$0.045/hr + \$0.045/GB data processed. <br> NAT Instance: EC2 instance cost. | No Free Tier.                                     |
+| **Elastic IPs**                       | Provides a **static public IP** for resources.                                                    | Bastion host with fixed IP.                          | First Elastic IP per region free; \$0.005/hr for additional or unused IPs.                 | 1 Elastic IP per region free.                     |
+| **VPC Peering**                       | Connects two VPCs privately.                                                                      | Dev VPC communicates with Prod VPC.                  | No hourly cost; data transfer: \$0.01/GB within region.                                    | No Free Tier.                                     |
+| **Transit Gateway**                   | Central hub to connect multiple VPCs and on-prem networks.                                        | 10 VPCs + 2 data centers hub-and-spoke.              | \$0.05 per attachment per hour + \$0.02 per GB data processed.                             | No Free Tier.                                     |
+| **VPC Endpoints (Interface/Gateway)** | Securely connect to AWS services without public internet.                                         | Private app accesses S3 via Gateway Endpoint.        | Interface Endpoint: \$0.01/hr + \$0.01/GB processed. <br> Gateway Endpoint: Free.          | Gateway Endpoint always free; Interface has cost. |
+| **Security Groups (SGs)**             | Instance-level firewall rules.                                                                    | DB SG allows only App Server SG.                     | No cost.                                                                                   | Always free.                                      |
+| **Network ACLs (NACLs)**              | Subnet-level firewall rules (stateless).                                                          | Block malicious IP range at subnet level.            | No cost.                                                                                   | Always free.                                      |
+| **Flow Logs**                         | Capture IP traffic for troubleshooting and compliance.                                            | Detect traffic spikes via CloudWatch Logs.           | \$0.50 per GB ingested (CloudWatch).                                                       | 5GB logs free per month for 12 months.            |
+| **Elastic Network Interfaces (ENIs)** | Attach multiple NICs to EC2 for segregation/failover.                                             | Public and internal-only ENIs on same server.        | Charged as part of EC2 instance; no separate cost.                                         | Always free.                                      |
+| **DHCP Options Sets**                 | Customize DNS/DHCP settings for resources.                                                        | Use corporate DNS servers.                           | No cost.                                                                                   | Always free.                                      |
+| **VPN Connections**                   | Secure IPsec tunnel to on-premises.                                                               | Corporate office connects to AWS workloads.          | \$0.05 per VPN connection per hour + \$0.05 per GB data.                                   | No Free Tier.                                     |
+| **AWS Direct Connect**                | Private, low-latency, high-bandwidth link from on-prem.                                           | Bank connects securely to AWS workloads.             | \$0.25/hr for 1Gbps connection + \$0.02/GB data.                                           | No Free Tier.                                     |
+| **PrivateLink**                       | Access services in another VPC privately.                                                         | SaaS vendor exposes service via PrivateLink.         | \$0.01 per GB processed + \$0.01/hr per endpoint.                                          | No Free Tier.                                     |
+| **IPv6 Support**                      | Scalable addressing for global apps and IoT.                                                      | Global e-commerce uses IPv6 for millions of devices. | No cost.                                                                                   | Always free.                                      |
+| **Carrier Gateway (CGW)**             | Connect 4G/5G networks with AWS for telecom workloads.                                            | 5G IoT platform connects devices to AWS workloads.   | \$0.25/hr per CGW + data transfer costs.                                                   | No Free Tier.                                     |
+
+---
 
 
 
