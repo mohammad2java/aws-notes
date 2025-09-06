@@ -1,145 +1,95 @@
 # 🚀 AWS Services Overview
 
-This document provides a categorized list of **AWS services** with short descriptions of **why we should use them**.
+This document provides a categorized list of **AWS services** with **purpose**, **costing**, and **Free Tier eligibility**.
 
 ---
 
 ## 1. Compute Services
 
-| Service | Why Use It |
-|---------|------------|
-| **EC2 (Elastic Compute Cloud)** | Run virtual machines in the cloud with full control over OS, networking, and storage. |
-| **Lambda** | Serverless compute – run code without managing servers, pay only for execution time. |
-| **ECS (Elastic Container Service)** | Orchestrate Docker containers easily on AWS-managed infrastructure. |
-| **EKS (Elastic Kubernetes Service)** | Run Kubernetes without managing the control plane, integrate with AWS services. |
-| **Lightsail** | Simple VMs for small apps, websites, and quick prototyping. |
-| **Batch** | Run batch computing jobs at scale with automatic resource provisioning. |
-| **Outposts** | Bring AWS infrastructure on-premises for hybrid cloud. |
-| **Local Zones** | Extend AWS services close to end-users for low-latency apps. |
+| Service         | Why Use It                                                                           | Costing                                                 | Free Tier                                                            |
+| --------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------- | -------------------------------------------------------------------- |
+| **EC2**         | Run virtual machines with full control over OS, networking, and storage.             | Pricing varies by instance type, region, usage.         | 750 hours per month of t2.micro or t3.micro instances for 12 months. |
+| **Lambda**      | Serverless compute – run code without managing servers, pay only for execution time. | \$0.20 per 1M requests, \$0.00001667 per GB-second.     | 1M requests & 400,000 GB-seconds per month for 12 months.            |
+| **ECS**         | Orchestrate Docker containers easily on AWS-managed infrastructure.                  | Pricing depends on EC2 or Fargate launch type.          | No Free Tier.                                                        |
+| **EKS**         | Run Kubernetes without managing control plane, integrate with AWS services.          | \$0.10/hour per cluster + EC2/Fargate costs.            | No Free Tier.                                                        |
+| **Lightsail**   | Simple VMs for small apps, websites, quick prototyping.                              | Starts at \$3.50/month for 512MB RAM, 1 vCPU, 20GB SSD. | 750 hours per month of Lightsail usage for 12 months.                |
+| **Batch**       | Run batch computing jobs at scale.                                                   | Depends on resources used.                              | No Free Tier.                                                        |
+| **Outposts**    | Bring AWS infrastructure on-premises for hybrid cloud.                               | Depends on configuration.                               | No Free Tier.                                                        |
+| **Local Zones** | Extend AWS services close to end-users for low-latency apps.                         | Depends on services used.                               | No Free Tier.                                                        |
 
 ---
 
 ## 2. Storage Services
 
-| Service | Why Use It |
-|---------|------------|
-| **S3 (Simple Storage Service)** | Object storage for files, images, backups – durable and highly scalable. |
-| **EBS (Elastic Block Store)** | Block storage for EC2 instances, persistent disks. |
-| **EFS (Elastic File System)** | Fully managed, scalable shared file system for multiple EC2 instances. |
-| **FSx** | Managed Windows File Server and Lustre for HPC workloads. |
-| **Glacier (S3 Glacier)** | Low-cost, long-term archival storage. |
-| **Storage Gateway** | Connect on-premises systems to AWS cloud storage seamlessly. |
+| Service             | Why Use It                                              | Costing                          | Free Tier                                                                  |
+| ------------------- | ------------------------------------------------------- | -------------------------------- | -------------------------------------------------------------------------- |
+| **S3**              | Object storage – files, images, backups.                | \$0.023 per GB (first 50TB).     | 5GB Standard Storage, 20,000 GET & 2,000 PUT requests/month for 12 months. |
+| **EBS**             | Block storage for EC2, persistent disks.                | \$0.08 per GB gp2.               | 30GB gp2, 2M I/Os, 1GB snapshot storage/month for 12 months.               |
+| **EFS**             | Fully managed scalable file system for multiple EC2s.   | \$0.30/GB/month.                 | 5GB Standard storage/month for 12 months.                                  |
+| **FSx**             | Managed Windows File Server & Lustre for HPC workloads. | Pricing varies by configuration. | No Free Tier.                                                              |
+| **Glacier**         | Low-cost long-term archival storage.                    | \$0.004/GB/month.                | 10GB/month for 12 months.                                                  |
+| **Storage Gateway** | Connect on-prem systems to AWS storage.                 | \$0.025 per GB stored.           | First 100GB/month free.                                                    |
 
 ---
 
 ## 3. Database Services
 
-| Service | Why Use It |
-|---------|------------|
-| **RDS** | Managed relational databases (MySQL, PostgreSQL, Oracle, SQL Server, MariaDB, Aurora). |
-| **Aurora** | High-performance, MySQL/Postgres-compatible cloud database. |
-| **DynamoDB** | Fully managed NoSQL database with millisecond response times. |
-| **ElastiCache** | Managed Redis/Memcached for caching and real-time performance. |
-| **Neptune** | Graph database for relationships and connected data. |
-| **Redshift** | Data warehouse for analytics at scale. |
-| **DocumentDB** | MongoDB-compatible managed NoSQL database. |
-| **Timestream** | Time-series database for IoT, monitoring, analytics. |
+| Service         | Why Use It                                                   | Costing                            | Free Tier                                                        |
+| --------------- | ------------------------------------------------------------ | ---------------------------------- | ---------------------------------------------------------------- |
+| **RDS**         | Managed relational databases.                                | Depends on engine, instance type.  | 750 hours db.t2.micro/db.t3.micro instances/month for 12 months. |
+| **Aurora**      | High-performance MySQL/Postgres-compatible DB.               | \$0.10/ACU-hour Aurora Serverless. | 750 hours t2.micro/t3.micro instances/month for 12 months.       |
+| **DynamoDB**    | Fully managed NoSQL DB with millisecond response.            | \$1.25 per WCU/RCU per month.      | 25GB storage, 25 WCU & 25 RCU/month for 12 months.               |
+| **ElastiCache** | Managed Redis/Memcached for caching & real-time performance. | \$0.021/hour for cache.m5.large.   | No Free Tier.                                                    |
+| **Neptune**     | Graph DB for relationships & connected data.                 | \$0.10/hour db.r5.large.           | 30-day trial: 750 hours db.t3.medium, 5GB storage, 30M IOs.      |
+| **Redshift**    | Data warehouse for analytics.                                | \$0.25/hour dc2.large node.        | 2-month trial: 750 hours dc2.large usage.                        |
+| **DocumentDB**  | MongoDB-compatible managed NoSQL DB.                         | \$0.30/hour db.r5.large.           | 30-day trial: 750 hours db.t3.medium, 5GB storage, 30M IOs.      |
+| **Timestream**  | Time-series DB for IoT, monitoring, analytics.               | \$0.50 per TB ingested.            | 1M writes & 1M reads/month for 12 months.                        |
 
 ---
 
 ## 4. Networking & Content Delivery
 
-| Service | Why Use It |
-|---------|------------|
-| **VPC (Virtual Private Cloud)** | Isolated network environment with subnets, routing, and firewalls. |
-| **Route 53** | Scalable DNS and domain registration service. |
-| **CloudFront** | CDN for caching and distributing content globally with low latency. |
-| **API Gateway** | Manage, secure, and scale APIs. |
-| **Direct Connect** | Dedicated network link from on-premises to AWS. |
-| **Global Accelerator** | Improves availability and performance of apps with static IPs. |
-| **PrivateLink** | Secure private connectivity between VPCs and services. |
+| Service                | Why Use It                                           | Costing                                              | Free Tier                                                            |
+| ---------------------- | ---------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------- |
+| **VPC**                | Isolated network with subnets, routing, firewalls.   | No charge for VPC itself; charges for NAT, VPN, etc. | No Free Tier.                                                        |
+| **Route 53**           | Scalable DNS & domain registration.                  | \$0.40/hosted zone, \$0.09/million queries.          | No Free Tier.                                                        |
+| **CloudFront**         | CDN for low-latency content distribution.            | \$0.085/GB for first 10TB.                           | 1TB data transfer out + 10M HTTP/HTTPS requests/month for 12 months. |
+| **API Gateway**        | Manage, secure, scale APIs.                          | REST: \$3.50/million requests; HTTP: \$1/million.    | 1M requests/month for REST & HTTP APIs for 12 months.                |
+| **Direct Connect**     | Dedicated network link to AWS.                       | \$0.25/hour for 1Gbps connection.                    | No Free Tier.                                                        |
+| **Global Accelerator** | Improve app availability & performance.              | \$0.025/hour + \$0.008/GB data.                      | No Free Tier.                                                        |
+| **PrivateLink**        | Secure private connectivity between VPCs & services. | \$0.01/GB data processed.                            | No Free Tier.                                                        |
 
 ---
 
 ## 5. Security, Identity & Compliance
 
-| Service | Why Use It |
-|---------|------------|
-| **IAM** | Control access with users, roles, and policies. |
-| **Cognito** | User authentication, sign-in, and federation for apps. |
-| **Secrets Manager** | Securely store and rotate credentials, API keys, and secrets. |
-| **KMS** | Create and control encryption keys. |
-| **Shield** | Managed DDoS protection. |
-| **WAF (Web Application Firewall)** | Protect apps from common web exploits. |
-| **Inspector** | Automated security assessment service. |
-| **GuardDuty** | Threat detection and monitoring service. |
-| **Macie** | Detect sensitive data (like PII) in S3 using ML. |
+| Service             | Why Use It                       | Costing                                                            | Free Tier                                 |
+| ------------------- | -------------------------------- | ------------------------------------------------------------------ | ----------------------------------------- |
+| **IAM**             | Manage users, roles, policies.   | Free.                                                              | Always free.                              |
+| **Cognito**         | User authentication, federation. | \$0.0055 per MAU (after free).                                     | 50,000 MAU/month free for 12 months.      |
+| **Secrets Manager** | Store & rotate secrets.          | \$0.40/secret/month + \$0.05 per 10,000 API calls.                 | 30-day trial for 1 secret.                |
+| **KMS**             | Create & manage encryption keys. | \$1 per key/month + \$0.03 per 10k requests.                       | 20,000 free requests/month for 12 months. |
+| **Shield**          | DDoS protection.                 | Standard included; Advanced \$3,000/month.                         | Standard free.                            |
+| **WAF**             | Web application firewall.        | \$5/month per WebACL + \$1 per rule + \$0.60 per million requests. | No Free Tier.                             |
+| **Inspector**       | Security assessment.             | \$0.30 per assessment target per month.                            | No Free Tier.                             |
+| **GuardDuty**       | Threat detection & monitoring.   | \$1 per GB analyzed.                                               | 30-day free trial.                        |
+| **Macie**           | Detect sensitive data using ML.  | \$5 per GB of data processed.                                      | 30-day free trial.                        |
 
 ---
 
 ## 6. Analytics & Big Data
 
-| Service | Why Use It |
-|---------|------------|
-| **Athena** | Query S3 data using SQL (serverless). |
-| **EMR** | Big data processing with Hadoop, Spark, Hive. |
-| **Kinesis** | Real-time streaming data processing. |
-| **QuickSight** | Business intelligence and dashboards. |
-| **Data Pipeline** | Move and process data between services. |
-| **Glue** | ETL (Extract, Transform, Load) for preparing datasets. |
+| Service           | Why Use It                                 | Costing                                              | Free Tier                                    |
+| ----------------- | ------------------------------------------ | ---------------------------------------------------- | -------------------------------------------- |
+| **Athena**        | Query S3 using SQL.                        | \$5 per TB scanned.                                  | 1TB scanned/month free for 12 months.        |
+| **EMR**           | Big data processing (Hadoop, Spark, Hive). | \$0.07 per EC2 instance-hour + EMR fees.             | No Free Tier.                                |
+| **Kinesis**       | Real-time streaming.                       | \$0.015 per shard-hour + \$0.015 per GB PUT payload. | 1M PUT payload units/month free.             |
+| **QuickSight**    | Business intelligence dashboards.          | \$9/user/month (standard).                           | 1 user free for 12 months.                   |
+| **Data Pipeline** | Move/process data between services.        | \$1 per pipeline per month + EC2 costs.              | No Free Tier.                                |
+| **Glue**          | ETL for preparing datasets.                | \$0.44 per DPU-hour.                                 | 1M requests & 1TB data processed/month free. |
 
----
 
-## 7. Machine Learning & AI
 
-| Service | Why Use It |
-|---------|------------|
-| **SageMaker** | Build, train, and deploy ML models at scale. |
-| **Rekognition** | Image and video analysis (faces, objects, moderation). |
-| **Polly** | Text-to-speech with natural voices. |
-| **Lex** | Build chatbots and conversational interfaces. |
-| **Comprehend** | NLP for text analysis (sentiment, entities, language). |
-| **Translate** | Language translation. |
-| **Forecast** | Time-series forecasting using ML. |
-| **Textract** | Extract text and data from scanned documents. |
-
----
-
-## 8. Developer Tools
-
-| Service | Why Use It |
-|---------|------------|
-| **CodeCommit** | Managed Git repositories. |
-| **CodeBuild** | Build and test code in the cloud. |
-| **CodeDeploy** | Automate deployments to EC2, Lambda, on-prem servers. |
-| **CodePipeline** | CI/CD pipeline automation. |
-| **Cloud9** | Web-based IDE. |
-| **X-Ray** | Debug and analyze distributed applications. |
-
----
-
-## 9. Management & Monitoring
-
-| Service | Why Use It |
-|---------|------------|
-| **CloudWatch** | Monitor logs, metrics, and events across AWS resources. |
-| **CloudTrail** | Track API calls and user activity for compliance and auditing. |
-| **Config** | Track AWS resource configurations over time. |
-| **Trusted Advisor** | Cost optimization, performance, and security recommendations. |
-| **Systems Manager (SSM)** | Manage servers and automation tasks at scale. |
-| **Service Catalog** | Manage approved IT service catalogs. |
-
----
-
-## 10. Migration & Transfer
-
-| Service | Why Use It |
-|---------|------------|
-| **DMS** | Migrate databases with minimal downtime. |
-| **SMS** | Migrate on-premises servers to AWS. |
-| **Snowball** | Transfer large datasets physically (petabyte-scale). |
-| **Migration Hub** | Track and manage migrations across AWS services. |
-| **DataSync** | Automate large data transfers between on-prem and AWS. |
 
 
 # 🌐 Amazon VPC Features
